@@ -1,6 +1,6 @@
 d3.csv("Main Crime data set .csv").then(function (dataset) {
   var dimensions = {
-    width: 1400,
+    width: 1200,
     height: 600,
     margin: {
       top: 10,
