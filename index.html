@@ -4,7 +4,7 @@
     <meta charset="UTF-8" />
     <title>Baltimore City Crime Data Visualization</title>
     <script src="https://d3js.org/d3.v7.min.js"></script>
-
+    <link rel="stylesheet" href="style.css" />
     <meta
       name="viewport"
       content="initial-scale=1,maximum-scale=1,user-scalable=no"
@@ -41,6 +41,7 @@
         height: 550px;
         width: 700px;
         margin: 0;
+        left: 40px;
       }
 
       .chart-container {
@@ -50,8 +51,8 @@
 
       #info-pane {
         position: absolute;
-        top: 10px;
-        right: 10px;
+        top: 165px;
+        right: 40px;
         z-index: 400;
         padding: 0;
         background: white;
@@ -60,31 +61,112 @@
       body {
         font-family: Arial;
       }
+      footer {
+        margin-top: 410px;
+        /* margin-bottom: 100px; */
+        height: 430px;
+        width: 100%;
+        text-align: center;
+        top: 0px;
+        padding: 3px;
+        /* background-color: DarkSalmon; */
+        color: white;
+      }
     </style>
   </head>
-  <body id="body" style="background-color: grey">
+  <nav class="navbar">
+    <!-- LOGO -->
+    <div class="logo">
+      Visualization Project 6030 : Crimes in Baltimore 2012-2017
+    </div>
+    <!-- NAVIGATION MENU -->
+    <ul class="nav-links">
+      <!-- USING CHECKBOX HACK -->
+      <!-- <label class="hamburger">&#9776;</label> -->
+      <!-- NAVIGATION MENUS -->
+      <div class="menu">
+        <li>
+          <a href="/index1.html"><h3>Home</h3></a>
+        </li>
+        <li>
+          <a href="/about.html"><h3>About</h3></a>
+        </li>
+        <!-- <li class="services">
+              <a href="/">Services</a>
+              <!- DROPDOWN MENU -->
+        <!-- <ul class="dropdown">
+                <li><a href="/">Home </a></li>
+                <li><a href="/">Contact Us 3</a></li>
+              </ul>
+            </li> -->
+      </div>
+    </ul>
+  </nav>
+  <br /><br /><br />
+  <body id="body" style="background-image: linear-gradient(red, white, blue)">
     <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.9.4/Chart.min.js"></script>
 
     <script src="https://cdnjs.cloudflare.com/ajax/libs/d3/7.1.1/d3.min.js"></script>
     <div>
       <div id="map"></div>
+      <br /><br />
       <div id="info-pane" class="leaflet-bar chart-container">
         <canvas id="chartCanvas"></canvas>
         <script src="map.js"></script>
       </div>
-      <div></div>
-      <br /><br />
+      <div>
+        <h2>
+          Here we have the displayed the geojson heat map which showcases the
+          counties with crimes starting from lowest to highest crimes. The
+          legend helps identify specific counties with higest and lowest crimes
+          the help of color hue
+        </h2>
+      </div>
+      <br /><br /><br />
       <div position:relative; id="my_dataviz" class="svg-container">
         <div width="1000px" height="400px">
           <svg id="map" width="450" height="1060" style="float: left"></svg>
           <div id="details"></div>
         </div>
-        <div></div>
+        <div>
+          <h2>
+            Here we have the displayed the Line chart which showcases the crime
+            trend for the counties from 2012 to 2017. The total crimes for the
+            clicked county is aggregated using the count of crimes from
+            2012-2017 for clicked county
+          </h2>
+        </div>
         <div width="1000px" height="400px">
           <svg id="line" width="450" height="650" style="float: right"></svg>
         </div>
       </div>
       <script src="script1.js"></script>
     </div>
+    <!-- <div>
+      <footer>
+        <p>
+          <center>
+            <h2><u>Authors</u></h2>
+            <b
+              >Bhushan Marathe, Shivam Nahar, Hemanth Reddy Dasari<br /><br
+            /></b>
+          </center>
+        </p>
+
+        <h3><center>Contact Information</center></h3>
+        <center>
+          <p><b>CUID:</b> C16217536<br /><b>Mail ID:</b>bmarath@clemson.edu</p>
+        </center>
+        <br />
+        <center>
+          <p><b>CUID:</b> C18487863<br /><b>Mail ID:</b>snahar@clemson.edu</p>
+        </center>
+        <br />
+        <center>
+          <p><b>CUID:</b> unknwon<br /><b>Mail ID:</b>hdasari@clemson.edu</p>
+        </center>
+        <br />
+      </footer>
+    </div> -->
   </body>
 </html>
