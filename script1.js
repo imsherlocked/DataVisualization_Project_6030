@@ -1,3 +1,6 @@
+console.log("Map" + map);
+console.log("TFM" + treesFeatureLayer);
+window.selectCounty = null;
 const svg = d3.select("svg"),
   width = 400,
   height = 460;
@@ -17,10 +20,10 @@ d3.json(
       .selectAll("path")
       .data(data.features)
       .join("path")
-      .attr("fill", "grey")
+      .attr("fill", "black")
       .attr("d", d3.geoPath().projection(projection))
       .style("stroke", "#111");
-    console.log(dataset);
+    // console.log(dataset);
     var headers = ["0", "100", "500", "1000", "2000", "3000", "4000", "5000"];
     var namecity = {};
     var first = {};
@@ -38,12 +41,12 @@ d3.json(
       five[d["Neighbourhood"]] = d["year2016"];
       six[d["Neighbourhood"]] = d["year2017"];
     });
-    console.log(namecity);
+    // console.log("NameCity" + namecity);
     var colorScale = d3
       .scaleLinear()
       .domain([0, 0.1 * d3.max(Object.values(namecity))])
       .domain([0, 100, 500, 1000, 2000, 3000, 4000, 5000])
-      .range(d3.schemeBlues[8]);
+      .range(d3.schemeReds[8]);
     let mouseOver = function (d) {
       d3.selectAll(".Community")
         .transition()
@@ -55,7 +58,6 @@ d3.json(
         .style("opacity", 1)
         .style("stroke", "black");
     };
-
     let mouseLeave = function (d) {
       d3.selectAll(".Community")
         .transition()
@@ -71,7 +73,7 @@ d3.json(
       .append("path")
       .attr("d", d3.geoPath().projection(projection))
       .style("fill", (d) => {
-        console.log(namecity[d.properties.Community]);
+        // console.log("---" + namecity[d.properties.Community]);
         return colorScale(namecity[d.properties.Community]);
       })
       .style("stroke", "white")
@@ -83,13 +85,90 @@ d3.json(
       .on("mouseover", mouseOver)
       .on("mouseleave", mouseLeave)
       .on("click", function (d, i) {
+        // console.log("D", i.properties.Community);
+        // scatterPlotDataArray[0].data[]
+        //console.log(first[i.properties.Community]);
+        var countyName = [];
+        var countyN = i.properties.Community;
+        //console.log(countyN);
+        countyName = countyN.split("/");
+        //console.log(countyName);
+        console.log("new thing");
+        countyName.forEach((d) => {
+          //baltimore/xyz
+          console.log(d);
+          treesFeatureLayer.eachFeature(function (e) {
+            // console.log("e", e)
+            var neigh = e.feature.properties.Neighbourhood;
+            if (neigh.includes(d) || d.includes(neigh)) {
+              console.log("success");
+              e.setOpacity(1);
+            } else {
+              console.log("set to 0");
+              e.setOpacity(0);
+            }
+          });
+          //console.log("jkjkk" + d);
+          // dataset.forEach((da) => {   //baltimore
+          //   //console.log(da.Neighbourhood.featureId);
+          //   // console.log(
+          //   //   "Main Data Elements",
+          //   //   da.Neighbourhood.toString().split("/")
+          //   // );
+          //   var neigh = da.Neighbourhood.toString().split("/");
+          //   //console.log("Neigh", neigh);
+          //   //console.log(da.Neighbourhood.indexOf(d));
+          //   if (neigh[0] == d) {
+          //     treesFeatureLayer.eachFeature(function (e, idx) {
+          //       // console.log(e.feature.id);
+          //       //if(da==d)
+          //       if (da.Neighbourhood.indexOf(e.feature.id) > -1) {
+          //         // console.log("Inside");
+          //         e.setOpacity(1);
+          //         e.setZIndexOffset(1000);
+          //       } else {
+          //         e.setOpacity(0.01);
+          //       }
+          //     });
+          //   }
+          // });
+        });
+        //console.log(countyName.split("/"));
+        // treesFeatureLayer.eachFeature(function (e, idx) {
+        //   // console.log(e.feature.id);
+        //   if (countyName.length > -1) {
+        //     e.setOpacity(1);
+        //     e.setZIndexOffset(1000);
+        //   } else {
+        //     e.setOpacity(0.01);
+        //   }
+        // });
+        // });
+        // function updateChart() {
+        //   var scatterPlotDataArray = [];
+        //   // window.selectCounty = county.on({
+        //   //   click: function (d) {
+        //   //     console.log(d);
+        //   //   },
+        //   // });
+        //   treesFeatureLayer.eachActiveFeature(function (e) {
+        //     // console.log("FeatureId", e.feature.id);
+        //     scatterPlotDataArray.push({
+        //       x: e.feature.properties.Impact,
+        //       y: e.feature.properties.Intensity,
+        //       featureId: e.feature.id,
+        //     });
+        //   });
+        //   return;
+        // }
+        // .on("click", function (d, i) {
         var year_2012 = first[i.properties.Community];
         var year_2013 = second[i.properties.Community];
         var year_2014 = third[i.properties.Community];
         var year_2015 = four[i.properties.Community];
         var year_2016 = five[i.properties.Community];
         var year_2017 = six[i.properties.Community];
-        console.log(i.properties.Community);
+        console.log(" -> " + i.properties.Community);
         console.log(namecity[i.properties.Community]);
         var data = [
           { Cases: "2012", count: year_2012 },
@@ -102,12 +181,10 @@ d3.json(
         if (document.getElementById("id5") != null) {
           document.getElementById("id5").remove();
         }
-
         var labels = data.map((d) => d.Cases);
-        console.log(labels);
+        console.log("Labels" + labels);
         var frequency = data.map((d) => d.count);
         console.log(frequency);
-
         const margin = { top: 10, right: 30, bottom: 40, left: 60 },
           width = 450 - margin.left - margin.right,
           height = 360 - margin.top - margin.bottom;
@@ -133,7 +210,6 @@ d3.json(
           .append("g")
           .attr("transform", `translate(0, ${height})`)
           .call(d3.axisBottom(x).ticks(7));
-
         const y = d3
           .scaleLinear()
           .domain([
@@ -163,12 +239,12 @@ d3.json(
           .attr("stroke", "#E74C3C")
           .style("stroke-width", 4)
           .style("fill", "none");
-
         document.getElementById("details").innerHTML =
           "<b>Total Crimes: " +
           namecity[i.properties.Community] +
           ", Neighbourhood: " +
           [i.properties.Community];
+        updateChart();
       });
     var legend = svg
       .selectAll(".legend")
