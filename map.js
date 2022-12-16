@@ -1,3 +1,4 @@
+// STEP 1: MAKE A MAP AND ADD LAYERS
 var map = L.map("map").setView([39.324, -76.612], 12);
 L.esri.Vector.vectorBasemapLayer("ArcGIS:Community", {
   apikey:
@@ -17,6 +18,8 @@ treesFeatureLayer.bindPopup(function (layer) {
     layer.feature.properties
   );
 });
+
+// STEP 2: DEFINE A CHART
 var initialChartData = {
   datasets: [
     {
@@ -65,6 +68,8 @@ var chart = new Chart("chartCanvas", {
   data: initialChartData,
   options: chartOptions,
 });
+
+// STEP 3: MAKE THE CHART DYNAMIC BY ESTABLISHING MAP-TO-CHART COMMUNICATION
 map.on("zoom move", updateChart);
 treesFeatureLayer.on("load", updateChart);
 function updateChart() {
