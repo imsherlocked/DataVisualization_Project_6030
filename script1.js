@@ -108,60 +108,8 @@ d3.json(
               e.setOpacity(0);
             }
           });
-          //console.log("jkjkk" + d);
-          // dataset.forEach((da) => {   //baltimore
-          //   //console.log(da.Neighbourhood.featureId);
-          //   // console.log(
-          //   //   "Main Data Elements",
-          //   //   da.Neighbourhood.toString().split("/")
-          //   // );
-          //   var neigh = da.Neighbourhood.toString().split("/");
-          //   //console.log("Neigh", neigh);
-          //   //console.log(da.Neighbourhood.indexOf(d));
-          //   if (neigh[0] == d) {
-          //     treesFeatureLayer.eachFeature(function (e, idx) {
-          //       // console.log(e.feature.id);
-          //       //if(da==d)
-          //       if (da.Neighbourhood.indexOf(e.feature.id) > -1) {
-          //         // console.log("Inside");
-          //         e.setOpacity(1);
-          //         e.setZIndexOffset(1000);
-          //       } else {
-          //         e.setOpacity(0.01);
-          //       }
-          //     });
-          //   }
-          // });
+          
         });
-        //console.log(countyName.split("/"));
-        // treesFeatureLayer.eachFeature(function (e, idx) {
-        //   // console.log(e.feature.id);
-        //   if (countyName.length > -1) {
-        //     e.setOpacity(1);
-        //     e.setZIndexOffset(1000);
-        //   } else {
-        //     e.setOpacity(0.01);
-        //   }
-        // });
-        // });
-        // function updateChart() {
-        //   var scatterPlotDataArray = [];
-        //   // window.selectCounty = county.on({
-        //   //   click: function (d) {
-        //   //     console.log(d);
-        //   //   },
-        //   // });
-        //   treesFeatureLayer.eachActiveFeature(function (e) {
-        //     // console.log("FeatureId", e.feature.id);
-        //     scatterPlotDataArray.push({
-        //       x: e.feature.properties.Impact,
-        //       y: e.feature.properties.Intensity,
-        //       featureId: e.feature.id,
-        //     });
-        //   });
-        //   return;
-        // }
-        // .on("click", function (d, i) {
         var year_2012 = first[i.properties.Community];
         var year_2013 = second[i.properties.Community];
         var year_2014 = third[i.properties.Community];
