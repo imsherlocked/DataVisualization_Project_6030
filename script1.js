@@ -23,7 +23,7 @@ d3.json(
       .attr("fill", "black")
       .attr("d", d3.geoPath().projection(projection))
       .style("stroke", "#111");
-    // console.log(dataset);
+   
     var headers = ["0", "100", "500", "1000", "2000", "3000", "4000", "5000"];
     var namecity = {};
     var first = {};
@@ -41,7 +41,7 @@ d3.json(
       five[d["Neighbourhood"]] = d["year2016"];
       six[d["Neighbourhood"]] = d["year2017"];
     });
-    // console.log("NameCity" + namecity);
+    
     var colorScale = d3
       .scaleLinear()
       .domain([0, 0.1 * d3.max(Object.values(namecity))])
@@ -73,7 +73,7 @@ d3.json(
       .append("path")
       .attr("d", d3.geoPath().projection(projection))
       .style("fill", (d) => {
-        // console.log("---" + namecity[d.properties.Community]);
+        
         return colorScale(namecity[d.properties.Community]);
       })
       .style("stroke", "white")
@@ -85,20 +85,18 @@ d3.json(
       .on("mouseover", mouseOver)
       .on("mouseleave", mouseLeave)
       .on("click", function (d, i) {
-        // console.log("D", i.properties.Community);
-        // scatterPlotDataArray[0].data[]
-        //console.log(first[i.properties.Community]);
+        
         var countyName = [];
         var countyN = i.properties.Community;
-        //console.log(countyN);
+        
         countyName = countyN.split("/");
-        //console.log(countyName);
+        
         console.log("new thing");
         countyName.forEach((d) => {
-          //baltimore/xyz
+          
           console.log(d);
           treesFeatureLayer.eachFeature(function (e) {
-            // console.log("e", e)
+           
             var neigh = e.feature.properties.Neighbourhood;
             if (neigh.includes(d) || d.includes(neigh)) {
               console.log("success");
