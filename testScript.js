@@ -1,3 +1,5 @@
+// #This is a not used in the code. Used only for testing and debugging
+
 console.log("Map" + map);
 console.log("TFM" + treesFeatureLayer);
 
